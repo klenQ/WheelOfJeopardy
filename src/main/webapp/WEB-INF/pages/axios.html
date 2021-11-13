@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <style>
+        #result{
+            width: 200px;
+            height: 100px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>AJAX</button>
+    <button>Test</button>
+    <div id="result"></div>
+    <script>
+        const btn = document.querySelectorAll('button');
+
+        //set baseURL
+        axios.defaults.baseURL = 'http://localhost:8080/WheelOfJeopardy';
+
+        btn[0].onclick = function () {
+            //get Request
+            axios.get('/axios-server', {
+                params: {
+                    id: 100,
+                    vip: 7
+                },
+                headers: {
+                    name: 'wheel',
+                    age: 20
+                }
+            }).then(value => {
+                console.log(value);
+            });
+        }
+        btn[1].onclick = function () {
+            //post Request
+            axios.post('/axios-server', {
+                username: 'admin',
+                password: 'admin'
+            }, {
+                params: {
+                    id: 200,
+                    vip: 9
+                },
+                headers: {
+                    name: 'wheel',
+                    age: 20
+                },
+
+            });
+        }
+        btn[2].onclick = function () {
+            //Common Request
+            axios({
+                url: '/axios-server',
+                method: 'post',
+                params:{
+                    vip:10,
+                    level:30,
+
+                },
+                headers:{
+                    a:100,
+                    b:200
+                },
+                data:{
+                    username:'admin',
+                    password:'admin'
+                }
+
+            }).then(value =>{
+                console.log(value);
+                console.log(value.status);
+                console.log(value.statusText);
+                console.log(value.headers);
+                console.log(value.data);
+            });
+        }
+
+        btn[3].onclick = function () {
+            //Test Request
+            axios({
+                url: '/axios-server',
+                method: 'post',
+                params:{
+                    vip:10,
+                    level:30,
+
+                },
+                // headers:{
+                //     a:100,
+                //     b:200
+                // },
+                data:{
+                    username:'admin',
+                    password:'admin'
+                }
+
+            }).then(value =>{
+                const result = document.getElementById("result");
+                result.innerHTML = value.data.extend.test.vip;
+                console.log(value);
+                console.log(value.status);
+                console.log(value.statusText);
+                console.log(value.headers);
+                console.log(value.data);
+            });
+        }
+    </script>
+</body>
+
+</html>
