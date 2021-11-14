@@ -20,23 +20,23 @@
         <property name="password" value="${jdbc.password}"></property>
     </bean>
 
-    <!--   import mybatis configuration -->
-<!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
-<!--        <property name="configLocation" value="classpath:mybatis-config.xml"></property>-->
-<!--        <property name="dataSource" ref="pooledDataSource"></property>-->
-<!--        &lt;!&ndash;        mappers &ndash;&gt;-->
-<!--        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>-->
-<!--    </bean>-->
+<!--       import mybatis configuration -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="dataSource" ref="pooledDataSource"></property>
+        <!--        mappers -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+    </bean>
 
     <!--    Scanner, put mybatis interface to spring ioc container-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.atguigu.crud"/>
+        <property name="basePackage" value="com.anonymous.woj"/>
     </bean>
-    <!--    Batch sqlSession-->
-<!--    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">-->
-<!--        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
-<!--        <constructor-arg name="executorType" value="BATCH"/>-->
-<!--    </bean>-->
+<!--        Batch sqlSession-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <constructor-arg name="executorType" value="BATCH"/>
+    </bean>
 
     <!--    transaction manager-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

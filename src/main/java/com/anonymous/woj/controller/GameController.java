@@ -9,4 +9,12 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class GameController {
+
+    /*Buzz in
+        Spin the wheel / choose category
+        Enter player name
+        Start/join game
+        Invite player -> returns session ID */
+
+
 }

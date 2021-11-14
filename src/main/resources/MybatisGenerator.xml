@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <context id="Mybatis3Context" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+<!--        suppress all comments-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+<!--        database connection-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5450969"
+                        userId="sql5450969"
+                        password="p1WJfbb4im">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+<!--define where javaBean located-->
+        <javaModelGenerator targetPackage="com.anonymous.woj.bean" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+<!--define where mapperXML located-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+<!--define where dao interface located-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.anonymous.woj.dao" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+<!--strategies for generating each table-->
+        <table tableName="Answers" domainObjectName="Answers"></table>
+        <table tableName="Categories" domainObjectName="Categories"></table>
+        <table tableName="Questions" domainObjectName="Questions"></table>
+
+    </context>
+</generatorConfiguration>

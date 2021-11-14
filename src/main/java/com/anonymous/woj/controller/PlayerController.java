@@ -1,6 +1,14 @@
 package com.anonymous.woj.controller;
 
+import com.anonymous.woj.bean.*;
+import com.anonymous.woj.service.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -9,4 +17,56 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class PlayerController {
+
+    @Autowired
+    GameService gameService;
+
+    //select category by category id
+    @ResponseBody
+    @RequestMapping("/category/{categoryId}")
+    public Msg selectCategory(int categoryId){
+
+        Categories categories = gameService.getCategory(categoryId);
+        return Msg.success().add("category",categories);
+    }
+
+
+    //select questions by category id
+    @ResponseBody
+    @RequestMapping("/questions/{categoryId}")
+    public Msg selectQuestionsByCategoryId(int categoryId){
+        List<Questions> questions = gameService.getQuestionsByCategoryId(categoryId);
+        return Msg.success().add("questions",questions);
+    }
+
+    //select answer
+    @ResponseBody
+    @RequestMapping("/selectAnswers/{questionId}")
+    public Msg selectAnswersByQuestionId(int questionId){
+
+        List<Answers> answers = gameService.getAnswersByQuestionId(questionId);
+
+        return Msg.success().add("answers",answers);
+    }
+    //check answer
+    @ResponseBody
+    @RequestMapping("/checkAnswer/{answerId}/{questionId}")
+    public Msg checkAnswerById(int answerId, int questionId){
+
+        Answers answers = gameService.getAnswersByAnswerId(answerId);
+        if(answers.getCorrectanswer()==0){
+            //the answer is not correct
+            return Msg.success().add("correctness",false);
+        }else {
+            //the answer is correct return point, and also return point value
+            //point value get from correspond question table
+            Questions questions = gameService.getQuestionsByQuestionId(questionId);
+            Integer pointValue = questions.getPointvalue();
+            return Msg.success().add("correctness",true).add("points",pointValue);
+        }
+
+
+    }
+
+
 }
