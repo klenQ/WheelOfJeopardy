@@ -30,5 +30,11 @@ public class TestController {
         System.out.println(test);
         return Msg.success().add("test",test);
     }
+    @ResponseBody
+    @RequestMapping("/axios-server/{id}")
+    public Msg test(int id){
+        System.out.println(id);
+        return Msg.success();
+    }
 
 }

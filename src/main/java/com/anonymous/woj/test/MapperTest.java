@@ -5,6 +5,7 @@ import com.anonymous.woj.bean.QuestionsExample;
 import com.anonymous.woj.dao.AnswersMapper;
 import com.anonymous.woj.dao.CategoriesMapper;
 import com.anonymous.woj.dao.QuestionsMapper;
+import com.anonymous.woj.service.GameService;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,8 @@ public class MapperTest {
 
     @Autowired
     SqlSession sqlSession;
+    @Autowired
+    GameService gameService;
     /**
      *
      */
@@ -48,6 +51,21 @@ public class MapperTest {
         System.out.println(question1.getCategoryid());
         System.out.println(question1.getPointvalue());
         System.out.println(question1.getQuestion());
+        System.out.println("finished");
+
+
+    }
+    @Test
+    public void testQuestions(){
+
+        List<Questions> questions = gameService.getQuestionsByCategoryId(1);
+        System.out.println(questions);
+        for (Questions q:
+             questions) {
+            System.out.println("points::"+q.getPointvalue());
+            System.out.println("Question::"+q.getQuestion());
+        }
+
         System.out.println("finished");
 
 

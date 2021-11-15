@@ -36,6 +36,12 @@
             </bean>
         </property>
     </bean>
+    <mvc:cors>
+        <mvc:mapping path="/**"
+        allowed-origins="*"
+        allowed-headers="*"
+        allowed-methods="*"/>
+    </mvc:cors>
 
 <!-- Default Configuration-->
     <mvc:annotation-driven/>

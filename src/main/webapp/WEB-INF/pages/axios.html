@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>axios</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         #result{
             width: 200px;
@@ -17,10 +18,9 @@
 </head>
 
 <body>
-    <button>GET</button>
-    <button>POST</button>
-    <button>AJAX</button>
-    <button>Test</button>
+    <button>Axios get</button>
+    <button>jQuery get</button>
+
     <div id="result"></div>
     <script>
         const btn = document.querySelectorAll('button');
@@ -29,87 +29,17 @@
         axios.defaults.baseURL = 'http://localhost:8080/WheelOfJeopardy';
 
         btn[0].onclick = function () {
-            //get Request
-            axios.get('/axios-server', {
-                params: {
-                    id: 100,
-                    vip: 7
-                },
-                headers: {
-                    name: 'wheel',
-                    age: 20
-                }
-            }).then(value => {
-                console.log(value);
-            });
-        }
-        btn[1].onclick = function () {
-            //post Request
-            axios.post('/axios-server', {
-                username: 'admin',
-                password: 'admin'
-            }, {
-                params: {
-                    id: 200,
-                    vip: 9
-                },
-                headers: {
-                    name: 'wheel',
-                    age: 20
-                },
-
-            });
-        }
-        btn[2].onclick = function () {
-            //Common Request
+            //Test questions/1
             axios({
-                url: '/axios-server',
-                method: 'post',
-                params:{
-                    vip:10,
-                    level:30,
+                url: '/questions/1',
+                method: 'get',
+                params: {
 
-                },
-                headers:{
-                    a:100,
-                    b:200
-                },
-                data:{
-                    username:'admin',
-                    password:'admin'
-                }
-
-            }).then(value =>{
-                console.log(value);
-                console.log(value.status);
-                console.log(value.statusText);
-                console.log(value.headers);
-                console.log(value.data);
-            });
-        }
-
-        btn[3].onclick = function () {
-            //Test Request
-            axios({
-                url: '/axios-server',
-                method: 'post',
-                params:{
-                    vip:10,
-                    level:30,
-
-                },
-                // headers:{
-                //     a:100,
-                //     b:200
-                // },
-                data:{
-                    username:'admin',
-                    password:'admin'
                 }
 
             }).then(value =>{
                 const result = document.getElementById("result");
-                result.innerHTML = value.data.extend.test.vip;
+                result.innerHTML = value.data.msg;
                 console.log(value);
                 console.log(value.status);
                 console.log(value.statusText);
@@ -117,6 +47,14 @@
                 console.log(value.data);
             });
         }
+
+        $('button').eq(1).click(function(){
+            $.get('http://localhost:8080/WheelOfJeopardy/questions/1',{},function(data){
+                console.log(data);
+            },'json');
+        });
+
+
     </script>
 </body>
 

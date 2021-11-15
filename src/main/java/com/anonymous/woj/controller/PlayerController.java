@@ -4,6 +4,7 @@ import com.anonymous.woj.bean.*;
 import com.anonymous.woj.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class PlayerController {
     //select category by category id
     @ResponseBody
     @RequestMapping("/category/{categoryId}")
-    public Msg selectCategory(int categoryId){
+    public Msg selectCategory(@PathVariable int categoryId){
 
         Categories categories = gameService.getCategory(categoryId);
         return Msg.success().add("category",categories);
@@ -34,7 +35,7 @@ public class PlayerController {
     //select questions by category id
     @ResponseBody
     @RequestMapping("/questions/{categoryId}")
-    public Msg selectQuestionsByCategoryId(int categoryId){
+    public Msg selectQuestionsByCategoryId(@PathVariable int categoryId){
         List<Questions> questions = gameService.getQuestionsByCategoryId(categoryId);
         return Msg.success().add("questions",questions);
     }
@@ -42,7 +43,7 @@ public class PlayerController {
     //select answer
     @ResponseBody
     @RequestMapping("/selectAnswers/{questionId}")
-    public Msg selectAnswersByQuestionId(int questionId){
+    public Msg selectAnswersByQuestionId(@PathVariable int questionId){
 
         List<Answers> answers = gameService.getAnswersByQuestionId(questionId);
 
@@ -51,7 +52,7 @@ public class PlayerController {
     //check answer
     @ResponseBody
     @RequestMapping("/checkAnswer/{answerId}/{questionId}")
-    public Msg checkAnswerById(int answerId, int questionId){
+    public Msg checkAnswerById(@PathVariable int answerId, @PathVariable int questionId){
 
         Answers answers = gameService.getAnswersByAnswerId(answerId);
         if(answers.getCorrectanswer()==0){
