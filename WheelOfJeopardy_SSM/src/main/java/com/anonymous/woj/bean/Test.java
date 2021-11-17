@@ -49,6 +49,8 @@ public class Test {
         return "Test{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", vip='" + vip + '\'' +
+                ", level='" + level + '\'' +
                 '}';
     }
 }

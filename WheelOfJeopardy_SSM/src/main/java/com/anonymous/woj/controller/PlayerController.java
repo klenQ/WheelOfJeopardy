@@ -1,13 +1,15 @@
 package com.anonymous.woj.controller;
 
-import com.anonymous.woj.bean.*;
 import com.anonymous.woj.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.anonymous.woj.bean.Answers;
+import com.anonymous.woj.bean.Categories;
+import com.anonymous.woj.bean.Msg;
+import com.anonymous.woj.bean.Questions;
 
 import java.util.List;
 

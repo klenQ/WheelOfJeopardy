@@ -23,7 +23,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 <!--define where javaBean located-->
-        <javaModelGenerator targetPackage="com.anonymous.woj.bean" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.anonymous.com.anonymous.woj.bean" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -32,7 +32,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 <!--define where dao interface located-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.anonymous.woj.dao" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.anonymous.com.anonymous.woj.dao" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 <!--strategies for generating each table-->
