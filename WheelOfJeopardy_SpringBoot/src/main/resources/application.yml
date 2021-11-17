@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: sql5450969
+    password: p1WJfbb4im
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5450969
+    hikari:
+      minimum-idle: 8
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 3000000
+      connection-test-query: select 1
+  devtools:
+    restart:
+      enabled: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
