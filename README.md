@@ -24,10 +24,10 @@ Developed with IntelliJ IDEA
 - Tomcat 8.0.50 / Springboot embed Tomcat
 
 ## Frameworks Used
-- SSM Version - Deprecated after minimal increment
-  - Spring
-  - SpringMVC
-  - MyBatis
+- ~~SSM Version - Deprecated after minimal increment~~
+  - ~~Spring~~
+  - ~~SpringMVC~~
+  - ~~MyBatis~~
 - Springboot Version - Will be use for final increment 
   - Springboot2
   - Mybatis
