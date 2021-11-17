@@ -1,5 +1,9 @@
 # Wheel Of Jeopardy Web application - Backend Server
 
+Backend Part of Project for Johns Hopkins EN 605.601 Fall 2021
+
+- Minimal increment - 2021.11.14
+
 ## Programming Languages
 - Java
 
@@ -17,14 +21,20 @@ Developed with IntelliJ IDEA
 > Kotlin: 212-1.5.31-release-546-IJ4638.7
 
 - JDK 1.8
-- Tomcat 8.0.50
+- Tomcat 8.0.50 / Springboot embed Tomcat
 
 ## Frameworks Used
-- Spring
-- SpringMVC
-- MyBatis
+- SSM Version - Deprecated after minimal increment
+  - Spring
+  - SpringMVC
+  - MyBatis
+- Springboot Version - Will be use for final increment 
+  - Springboot2
+  - Mybatis
 
 ## API
+
+### Minimal Increment:
 
 - `/category/{categoryId}`
   - return a json object contain one Categories class object correspond to the categoryId 
@@ -48,3 +58,11 @@ Developed with IntelliJ IDEA
 - `/checkAnswer/{answerId}/{questionId}`
   - return a json object contain a boolean value indicate whether the answer is correct
 
+### Final Increment
+
+> - `/category/{categoryId}`
+> - `/questions/{categoryId}`
+> - `/selectAnswers/{questionId}`
+> - `/checkAnswer/{answerId}/{questionId}`
+------
+- more to implement
