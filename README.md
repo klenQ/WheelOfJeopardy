@@ -37,26 +37,30 @@ Developed with IntelliJ IDEA
 ### Minimal Increment:
 
 - `/category/{categoryId}`
-  - return a json object contain one Categories class object correspond to the categoryId 
-  - Categories object includes:
-    - CategoryID 
-    - CategoryName
+  - GET
+    - return a json object contain one Categories class object correspond to the categoryId 
+    - Categories object includes:
+      - CategoryID 
+      - CategoryName
 - `/questions/{categoryId}`
-  - return a json object contain a list of Questions class object correspond to the categoryId
-  - Questions object contains:
-    - QuestionID
-    - CategoryID
-    - PointValue
-    - Question
+  - GET
+    - return a json object contain a list of Questions class object correspond to the categoryId
+    - Questions object contains:
+      - QuestionID
+      - CategoryID
+      - PointValue
+      - Question
 - `/selectAnswers/{questionId}`
-  - return a json object contain a list of Answers class object correspond to the questionId
-  - Answers object contains: 
-    - AnswerID
-    - QuestionID
-    - AnswerChoices
-    - CorrectAnswer
+  - GET
+    - return a json object contain a list of Answers class object correspond to the questionId
+    - Answers object contains: 
+      - AnswerID
+      - QuestionID
+      - AnswerChoices
+      - CorrectAnswer
 - `/checkAnswer/{answerId}/{questionId}`
-  - return a json object contain a boolean value indicate whether the answer is correct
+  - GET
+    - return a json object contain a boolean value indicate whether the answer is correct
 
 ### Final Increment
 
@@ -65,4 +69,16 @@ Developed with IntelliJ IDEA
 > - `/selectAnswers/{questionId}`
 > - `/checkAnswer/{answerId}/{questionId}`
 ------
+- `/category`
+  - GET
+- `/game/getAllGames`
+  - POST
+- `/game/start`
+  - POST
+- `/game/connect`
+  - POST
+- `/game/gameplay`
+  - POST
+
+
 - more to implement

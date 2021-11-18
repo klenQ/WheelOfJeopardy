@@ -1,4 +1,4 @@
-package com.anonymous.woj.bean;
+package com.anonymous.woj.entity;
 
 /**
  * @Description:
