@@ -62,7 +62,7 @@ Developed with IntelliJ IDEA
   - GET
     - return a json object contain a boolean value indicate whether the answer is correct
 
-### Target Increment
+### Target Increment:
 
 > From last increment
 > - `/category/{categoryId}`
@@ -87,7 +87,7 @@ Developed with IntelliJ IDEA
 - `/game/gameplay`
   - POST
     - accept an object that contain Player object with login name, game ID, and the score earned for that player
-    - Example: 
+    - Example post request body: 
       - ```json
         {
             "player": {
