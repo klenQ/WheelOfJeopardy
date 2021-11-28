@@ -4,9 +4,12 @@ import com.anonymous.woj.bean.Msg;
 import com.anonymous.woj.entity.Game;
 import com.anonymous.woj.entity.GamePlay;
 import com.anonymous.woj.entity.Player;
+import com.anonymous.woj.exception.InvalidGameException;
+import com.anonymous.woj.exception.InvalidParamException;
 import com.anonymous.woj.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -29,6 +32,8 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @GetMapping("/getAllGames")
     public Msg getAllGames() {
@@ -53,18 +58,31 @@ public class GameController {
     @PostMapping("/connect")
     public Msg connect(@RequestBody Player player, String gameId){
         System.out.println("Player-"+player +"::"+ gameId);
-        Game game = gameService.connectToGame(player, gameId);
+        Game game = null;
+        try {
+            game = gameService.connectToGame(player, gameId);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e){
+            return Msg.fail(e.getMessage());
+        }
         return Msg.success().add("game",game);
-
     }
 
     @PostMapping("/gameplay")
     public Msg gamePlay(@RequestBody GamePlay gamePlay){
         System.out.println("Player-"+gamePlay.getPlayer() +"::"+gamePlay.getScoreEarned()+"::"+ gamePlay.getGameId());
         //GamePlay contain Player, game ID, and the score earned for that player
-        Game game = gameService.gamePlay(gamePlay);
+        Game game = null;
+        try {
+            game = gameService.gamePlay(gamePlay);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e) {
+            return Msg.fail(e.getMessage());
+        }
+        simpMessagingTemplate.convertAndSend("/topic/game-progress" + game.getGameId(),game);
         return Msg.success().add("game",game);
-
     }
 
 

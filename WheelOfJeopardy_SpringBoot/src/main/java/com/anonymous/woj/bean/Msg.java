@@ -30,6 +30,13 @@ public class Msg {
         return result;
 
     }
+    public static Msg fail(String msg){
+        Msg result = new Msg();
+        result.setCode(200);
+        result.setMsg(msg);
+        return result;
+
+    }
     public Msg add(String key, Object value){
         this.getExtend().put(key,value);
         return this;

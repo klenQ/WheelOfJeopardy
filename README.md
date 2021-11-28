@@ -62,8 +62,9 @@ Developed with IntelliJ IDEA
   - GET
     - return a json object contain a boolean value indicate whether the answer is correct
 
-### Final Increment
+### Target Increment
 
+> From last increment
 > - `/category/{categoryId}`
 > - `/questions/{categoryId}`
 > - `/selectAnswers/{questionId}`
@@ -72,13 +73,38 @@ Developed with IntelliJ IDEA
 - `/category`
   - GET
 - `/game/getAllGames`
-  - POST
+  - GET
+    - get all games that is created
 - `/game/start`
   - POST
+    - accept a login name representing a player in request body
+    - return a game object with game status in json
 - `/game/connect`
   - POST
+    - accept a login name in request body and a gameId as param in url representing a player and which game room to join
+      - do not accept player with same login name 
+    - return a game object with game status in json
 - `/game/gameplay`
   - POST
+    - accept an object that contain Player object with login name, game ID, and the score earned for that player
+    - Example: 
+      - ```json
+        {
+            "player": {
+            "login":"jack"
+            },
+            "scoreEarned":30,   
+            "gameId": "9305d040-b2d3-491f-8ea4-a151797bfb6b"
+        }
+      
+    - return a game object with game status in json
+    - when all 30 questions were answered, the game finished. winner's status would be also included in the game object.  
+- ...
+- maybe more to implement
 
-
-- more to implement
+---
+### Possible extra functions
+- websocket implementation
+  - endpoint: `/gameplay`
+  - `registry.setApplicationDestinationPrefixes("app").enableSimpleBroker("/topic");`
+  - `simpMessagingTemplate.convertAndSend("/topic/game-progress" + game.getGameId(),game);`

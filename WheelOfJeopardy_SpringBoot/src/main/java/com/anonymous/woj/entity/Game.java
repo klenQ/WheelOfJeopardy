@@ -13,6 +13,7 @@ public class Game {
     private Player player3;
     private GameStatus status;
     private Player winner;
+    private Integer countQuestionAnswered;
 
     public String getGameId() {
         return gameId;
@@ -54,6 +55,14 @@ public class Game {
         this.status = status;
     }
 
+    public Integer getCountQuestionAnswered() {
+        return countQuestionAnswered;
+    }
+
+    public void setCountQuestionAnswered(Integer countQuestionAnswered) {
+        this.countQuestionAnswered = countQuestionAnswered;
+    }
+
     public Player getWinner() {
         return winner;
     }
@@ -66,10 +75,12 @@ public class Game {
     public String toString() {
         return "Game{" +
                 "gameId='" + gameId + '\'' +
+                ", countQuestionAnswered='" + countQuestionAnswered + '\'' +
                 ", player1=" + player1 +
                 ", player2=" + player2 +
                 ", player3=" + player3 +
                 ", status=" + status +
+                ", winner=" + winner +
                 '}';
     }
 }
