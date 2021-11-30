@@ -99,6 +99,15 @@ Developed with IntelliJ IDEA
       
     - return a game object with game status in json
     - when all 30 questions were answered, the game finished. winner's status would be also included in the game object.  
+- `/game/selectCategories`
+  - POST
+    - accept a list of categoryId in request body, correspond gameId in param
+      - Example: `[1,2,3,4,5,6]`
+    - return a game object with selected categories as a property of it.
+- `/game/getSelectedCategories`
+  - GET
+    - accept correspond gameId in params
+    - return a list of selected categories
 - ...
 - maybe more to implement
 

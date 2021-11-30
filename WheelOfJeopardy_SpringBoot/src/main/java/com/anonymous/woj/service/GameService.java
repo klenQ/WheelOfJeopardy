@@ -33,6 +33,26 @@ public class GameService {
         GameStorage.getInstance().setGames(game);
         return game;
     }
+    public Game selectCategory(int[] category,String gameId) throws InvalidParamException, InvalidGameException {
+        if(!GameStorage.getInstance().getGames().containsKey(gameId)){
+            //game invalid
+            //there is no such game to connect
+            System.out.println("there is no such game to connect");
+            throw new InvalidParamException("Game with provided id doesn't exist");
+        }
+        Game game = GameStorage.getInstance().getGames().get(gameId);
+        if(game.getStatus().equals(GameStatus.FINISHED)){
+            //game already finished
+            System.out.println("game already finished");
+            throw new InvalidGameException("The Game correspond to the gameId is Finished");
+        }
+
+        game.setSelectedCategory(category);
+        return game;
+
+    }
+
+
     public Game connectToGame(Player playerJoining, String gameId) throws InvalidParamException, InvalidGameException{
 
         if(!GameStorage.getInstance().getGames().containsKey(gameId)){
@@ -171,5 +191,22 @@ public class GameService {
 
     public Map<String, Game> getAllGames() {
         return GameStorage.getInstance().getGames();
+    }
+
+    public int[] getSelectCategory(String gameId) throws InvalidGameException, InvalidParamException {
+        if(!GameStorage.getInstance().getGames().containsKey(gameId)){
+            //game invalid
+            //there is no such game to connect
+            System.out.println("there is no such game to connect");
+            throw new InvalidParamException("Game with provided id doesn't exist");
+        }
+        Game game = GameStorage.getInstance().getGames().get(gameId);
+        if(game.getStatus().equals(GameStatus.FINISHED)){
+            //game already finished
+            System.out.println("game already finished");
+            throw new InvalidGameException("The Game correspond to the gameId is Finished");
+        }
+
+        return game.getSelectedCategory();
     }
 }

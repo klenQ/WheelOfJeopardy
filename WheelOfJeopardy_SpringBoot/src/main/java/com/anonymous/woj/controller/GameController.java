@@ -85,5 +85,31 @@ public class GameController {
         return Msg.success().add("game",game);
     }
 
+    @PostMapping("/selectCategories")
+    public Msg selectCategories(@RequestBody int[] categories, String gameId){
+        Game game = null;
+        try {
+            game = gameService.selectCategory(categories,gameId);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e) {
+            return Msg.fail(e.getMessage());
+        }
+        return Msg.success().add("game", game);
+    }
+    @GetMapping("/getSelectedCategories")
+    public Msg selectCategories(String gameId){
+        int[] categoriesIds = null;
+        try {
+            categoriesIds = gameService.getSelectCategory(gameId);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e) {
+            return Msg.fail(e.getMessage());
+        }
+        return Msg.success().add("categoriesIds", categoriesIds);
+    }
+
+
 
 }

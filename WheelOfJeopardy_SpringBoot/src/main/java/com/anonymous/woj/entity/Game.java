@@ -14,6 +14,7 @@ public class Game {
     private GameStatus status;
     private Player winner;
     private Integer countQuestionAnswered;
+    private int[] selectedCategory;
 
     public String getGameId() {
         return gameId;
@@ -71,10 +72,19 @@ public class Game {
         this.winner = winner;
     }
 
+    public int[] getSelectedCategory() {
+        return selectedCategory;
+    }
+
+    public void setSelectedCategory(int[] selectedCategory) {
+        this.selectedCategory = selectedCategory;
+    }
+
     @Override
     public String toString() {
         return "Game{" +
                 "gameId='" + gameId + '\'' +
+                "selectedCategory='" + selectedCategory + '\'' +
                 ", countQuestionAnswered='" + countQuestionAnswered + '\'' +
                 ", player1=" + player1 +
                 ", player2=" + player2 +
