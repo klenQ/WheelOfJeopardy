@@ -111,5 +111,45 @@ public class GameController {
     }
 
 
+    //Buzzing
+    @PostMapping("/buzz")
+    public Msg buzz(@RequestBody Player player, String gameId){
+        try {
+            gameService.buzz(player,gameId);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e) {
+            return Msg.fail(e.getMessage());
+        }
+        return Msg.success();
+    }
+
+    @GetMapping("/getBuzzed")
+    public Msg getBuzzedPlayer(String gameId){
+        Player player = null;
+        try {
+            player = gameService.getAllBuzzed(gameId);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e) {
+            return Msg.fail(e.getMessage());
+        }
+        return Msg.success().add("player",player);
+    }
+
+    @GetMapping("/buzzRelease")
+    public Msg releaseBuzzed(String gameId){
+        Game game = null;
+        try {
+            game = gameService.buzzRelease(gameId);
+        } catch (InvalidParamException e) {
+            return Msg.fail(e.getMessage());
+        } catch (InvalidGameException e) {
+            return Msg.fail(e.getMessage());
+        }
+        return Msg.success().add("game",game);
+
+    }
+
 
 }

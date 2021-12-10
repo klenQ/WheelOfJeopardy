@@ -8,9 +8,12 @@ package com.anonymous.woj.entity;
 public class Player {
     private String login;
     private int score;
+    private BuzzStatus buzzStatus;
 
     public Player() {
         this.score = 0;
+        this.buzzStatus = BuzzStatus.NONE;
+
     }
 
     public Player(String login) {
@@ -34,11 +37,20 @@ public class Player {
         this.score = score;
     }
 
+    public BuzzStatus getBuzzStatus() {
+        return buzzStatus;
+    }
+
+    public void setBuzzStatus(BuzzStatus buzzStatus) {
+        this.buzzStatus = buzzStatus;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "login='" + login + '\'' +
                 ", score=" + score +
+                ", buzzStatus=" + buzzStatus +
                 '}';
     }
 }

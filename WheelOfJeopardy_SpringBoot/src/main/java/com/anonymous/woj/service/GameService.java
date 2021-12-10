@@ -1,9 +1,6 @@
 package com.anonymous.woj.service;
 
-import com.anonymous.woj.entity.Game;
-import com.anonymous.woj.entity.GamePlay;
-import com.anonymous.woj.entity.GameStatus;
-import com.anonymous.woj.entity.Player;
+import com.anonymous.woj.entity.*;
 import com.anonymous.woj.exception.InvalidGameException;
 import com.anonymous.woj.exception.InvalidParamException;
 import com.anonymous.woj.storage.GameStorage;
@@ -102,7 +99,7 @@ public class GameService {
      */
     public Game gamePlay(GamePlay gamePlay) throws InvalidParamException, InvalidGameException{
 
-        if(gamePlay.getScoreEarned()<=10){
+        if(gamePlay.getScoreEarned()<10){
             throw new InvalidGameException("Invalid points earned");
         }
 
@@ -112,12 +109,20 @@ public class GameService {
             System.out.println("there is no such game to connect");
             throw new InvalidParamException("Game with provided id doesn't exist");
         }
+
+
+
         Game game = GameStorage.getInstance().getGames().get(gamePlay.getGameId());
         if(game.getStatus().equals(GameStatus.FINISHED)){
             //game already finished
             System.out.println("game already finished");
             throw new InvalidGameException("The Game correspond to the gameId is Finished");
         }
+
+        if(game.getStatus().equals(GameStatus.NEW)){
+            throw new InvalidGameException("The room is not full yet, Wait for everyone to join");
+        }
+
 
         //add point for that player
 
@@ -208,5 +213,96 @@ public class GameService {
         }
 
         return game.getSelectedCategory();
+    }
+
+    public Game buzz(Player player,String gameId) throws InvalidParamException, InvalidGameException {
+
+
+        if(!GameStorage.getInstance().getGames().containsKey(gameId)){
+            //game invalid
+            //there is no such game to connect
+            System.out.println("there is no such game to connect");
+            throw new InvalidParamException("Game with provided id doesn't exist");
+        }
+        Game game = GameStorage.getInstance().getGames().get(gameId);
+        if(game.getStatus().equals(GameStatus.FINISHED)){
+            //game already finished
+            System.out.println("game already finished");
+            throw new InvalidGameException("The Game correspond to the gameId is Finished");
+        }
+
+        if(game.getStatus().equals(GameStatus.NEW)){
+            throw new InvalidGameException("The room is not full yet, Wait for everyone to join");
+        }
+
+        if(game.getPlayer1().getLogin().equals(player.getLogin())){
+            game.getPlayer1().setBuzzStatus(BuzzStatus.BUZZED);
+        }
+        if(game.getPlayer2().getLogin().equals(player.getLogin())){
+            game.getPlayer1().setBuzzStatus(BuzzStatus.BUZZED);
+        }
+        if(game.getPlayer3().getLogin().equals(player.getLogin())){
+            game.getPlayer1().setBuzzStatus(BuzzStatus.BUZZED);
+        }
+
+        return game;
+
+
+    }
+
+    public Game buzzRelease(String gameId) throws InvalidParamException, InvalidGameException {
+
+        if(!GameStorage.getInstance().getGames().containsKey(gameId)){
+            //game invalid
+            //there is no such game to connect
+            System.out.println("there is no such game to connect");
+            throw new InvalidParamException("Game with provided id doesn't exist");
+        }
+        Game game = GameStorage.getInstance().getGames().get(gameId);
+        if(game.getStatus().equals(GameStatus.FINISHED)){
+            //game already finished
+            System.out.println("game already finished");
+            throw new InvalidGameException("The Game correspond to the gameId is Finished");
+        }
+
+        if(game.getStatus().equals(GameStatus.NEW)){
+            throw new InvalidGameException("The room is not full yet, Wait for everyone to join");
+        }
+        game.getPlayer1().setBuzzStatus(BuzzStatus.RELEASED);
+        game.getPlayer2().setBuzzStatus(BuzzStatus.RELEASED);
+        game.getPlayer3().setBuzzStatus(BuzzStatus.RELEASED);
+        return game;
+    }
+
+    public Player getAllBuzzed(String gameId) throws InvalidParamException, InvalidGameException {
+        if(!GameStorage.getInstance().getGames().containsKey(gameId)){
+            //game invalid
+            //there is no such game to connect
+            System.out.println("there is no such game to connect");
+            throw new InvalidParamException("Game with provided id doesn't exist");
+        }
+        Game game = GameStorage.getInstance().getGames().get(gameId);
+        if(game.getStatus().equals(GameStatus.FINISHED)){
+            //game already finished
+            System.out.println("game already finished");
+            throw new InvalidGameException("The Game correspond to the gameId is Finished");
+        }
+
+        if(game.getStatus().equals(GameStatus.NEW)){
+            throw new InvalidGameException("The room is not full yet, Wait for everyone to join");
+        }
+        if(game.getPlayer1().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+            return game.getPlayer1();
+        }else if(game.getPlayer2().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+            return game.getPlayer2();
+        }else if(game.getPlayer3().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+            return game.getPlayer3();
+        }else{
+            throw new InvalidGameException("No one buzzed yet");
+        }
+
+
+
+
     }
 }
