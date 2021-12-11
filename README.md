@@ -108,6 +108,23 @@ Developed with IntelliJ IDEA
   - GET
     - accept correspond gameId in params
     - return a list of selected categories
+- `/game/buzz`
+  - POST
+  - set the buzz status for a player to BUZZED, other player can not earn point even if they answer the question correctly
+  - Example post request body:
+    - ```json
+        {
+            "login": "jack"
+        }
+    - with gameId are Params in url
+- `/game/getBuzzed`
+  - GET
+  - get the information from player who buzzed before and not finished answering the question yet
+  - with gameId are Params in url
+- `/game/buzzRelease`
+  - GET
+  - release all the buzzed status for all players
+  - with gameId are Params in url
 - ...
 - maybe more to implement
 

@@ -128,14 +128,25 @@ public class GameService {
 
         //compare with player's name, which mean they cannot have the same name in the same game
         if(gamePlay.getPlayer().getLogin().equals(game.getPlayer1().getLogin())){
-
+            //player1
+            if(!game.getPlayer1().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+                throw new InvalidGameException("Someone else buzzed before you, you are late!");
+            }
             int score = game.getPlayer1().getScore();
 
             game.getPlayer1().setScore(score+gamePlay.getScoreEarned());
         }else if(gamePlay.getPlayer().getLogin().equals(game.getPlayer2().getLogin())){
+            //player2
+            if(!game.getPlayer2().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+                throw new InvalidGameException("Someone else buzzed before you, you are late!");
+            }
             int score = game.getPlayer2().getScore();
             game.getPlayer2().setScore(score+gamePlay.getScoreEarned());
         }else {
+            //player3
+            if(!game.getPlayer3().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+                throw new InvalidGameException("Someone else buzzed before you, you are late!");
+            }
             int score = game.getPlayer3().getScore();
             game.getPlayer3().setScore(score+gamePlay.getScoreEarned());
         }
@@ -239,10 +250,10 @@ public class GameService {
             game.getPlayer1().setBuzzStatus(BuzzStatus.BUZZED);
         }
         if(game.getPlayer2().getLogin().equals(player.getLogin())){
-            game.getPlayer1().setBuzzStatus(BuzzStatus.BUZZED);
+            game.getPlayer2().setBuzzStatus(BuzzStatus.BUZZED);
         }
         if(game.getPlayer3().getLogin().equals(player.getLogin())){
-            game.getPlayer1().setBuzzStatus(BuzzStatus.BUZZED);
+            game.getPlayer3().setBuzzStatus(BuzzStatus.BUZZED);
         }
 
         return game;

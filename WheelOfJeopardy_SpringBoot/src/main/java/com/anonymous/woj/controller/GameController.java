@@ -114,14 +114,15 @@ public class GameController {
     //Buzzing
     @PostMapping("/buzz")
     public Msg buzz(@RequestBody Player player, String gameId){
+        Game game = null;
         try {
-            gameService.buzz(player,gameId);
+            game = gameService.buzz(player,gameId);
         } catch (InvalidParamException e) {
             return Msg.fail(e.getMessage());
         } catch (InvalidGameException e) {
             return Msg.fail(e.getMessage());
         }
-        return Msg.success();
+        return Msg.success().add("game",game);
     }
 
     @GetMapping("/getBuzzed")
