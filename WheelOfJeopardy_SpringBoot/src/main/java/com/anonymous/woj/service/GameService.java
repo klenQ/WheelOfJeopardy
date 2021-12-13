@@ -126,6 +126,13 @@ public class GameService {
 
         //add point for that player
 
+        if(!(game.getPlayer1().getBuzzStatus().equals(BuzzStatus.BUZZED)
+                ||game.getPlayer2().getBuzzStatus().equals(BuzzStatus.BUZZED)
+                ||game.getPlayer3().getBuzzStatus().equals(BuzzStatus.BUZZED))){
+
+            throw new InvalidGameException("No one buzzed yet, someone need to buzz before answering");
+        }
+
         //compare with player's name, which mean they cannot have the same name in the same game
         if(gamePlay.getPlayer().getLogin().equals(game.getPlayer1().getLogin())){
             //player1
@@ -244,6 +251,14 @@ public class GameService {
 
         if(game.getStatus().equals(GameStatus.NEW)){
             throw new InvalidGameException("The room is not full yet, Wait for everyone to join");
+        }
+
+
+        if(game.getPlayer1().getBuzzStatus().equals(BuzzStatus.BUZZED)
+                ||game.getPlayer2().getBuzzStatus().equals(BuzzStatus.BUZZED)
+                ||game.getPlayer3().getBuzzStatus().equals(BuzzStatus.BUZZED)){
+
+            throw new InvalidGameException("Someone all ready buzzed, please wait for the next time");
         }
 
         if(game.getPlayer1().getLogin().equals(player.getLogin())){
